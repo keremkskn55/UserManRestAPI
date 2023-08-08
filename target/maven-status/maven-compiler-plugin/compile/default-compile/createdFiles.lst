@@ -1,0 +1,6 @@
+com\kerem\userman\dao\UserDao.class
+com\kerem\userman\dao\impl\UserDaoImpl.class
+com\kerem\userman\ws\UserWs.class
+com\kerem\userman\business\impl\UserBusinessImpl.class
+com\kerem\userman\business\UserBusiness.class
+com\kerem\userman\model\User.class
