@@ -13,6 +13,13 @@
 	    <scope>provided</scope>
 	</dependency>
 
+	<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt-api</artifactId>
+	    <version>0.11.5</version>
+	</dependency>
+
 
 	<!-- Hibernate and JPA -->
 <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
