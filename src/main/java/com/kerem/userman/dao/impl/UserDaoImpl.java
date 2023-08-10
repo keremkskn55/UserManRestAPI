@@ -6,12 +6,12 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 
-import com.kerem.userman.dao.UserDao;
 import com.kerem.userman.model.User;
+import com.kerem.userman.dao.UserDao;
 
 @Named("userDaoImpl")
 public class UserDaoImpl implements UserDao{
@@ -107,8 +107,14 @@ public class UserDaoImpl implements UserDao{
     
     public User findByEmail(String email) {
     	EntityManager em = entityManagerFactory.createEntityManager();
-    	TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u WHERE u.email = :email AND u.password = :password", User.class
-            );
+    	TypedQuery<User> query = em.createNamedQuery(User.FIND_BY_EMAIL, User.class);
+    	
+    	query.setParameter("email", email);
+    	
+    	try {
+    		return query.getSingleResult();
+    	} catch (NoResultException e) {
+    		return null;
+    	}
     }
 }

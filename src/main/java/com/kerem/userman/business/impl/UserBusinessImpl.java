@@ -8,8 +8,9 @@ import javax.ws.rs.core.Response;
 
 import com.kerem.userman.business.UserBusiness;
 import com.kerem.userman.dao.UserDao;
-import com.kerem.userman.dao.impl.UserDaoImpl;
 import com.kerem.userman.model.User;
+
+
 
 @Named("userBusinessImpl")
 public class UserBusinessImpl implements UserBusiness {

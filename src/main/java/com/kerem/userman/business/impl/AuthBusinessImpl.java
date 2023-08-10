@@ -40,6 +40,7 @@ public class AuthBusinessImpl implements AuthBusiness{
 
 	@Override
 	public Response register(User user) {
+		user.setPassword(PasswordUtils.digestPassword(user.getPassword()));
 		boolean isAdded = userDao.add(user);
 		
 		if (!isAdded) {
@@ -52,8 +53,15 @@ public class AuthBusinessImpl implements AuthBusiness{
 
 	@Override
 	public Response signIn(SignInCredentailsDto signInCredentialsDto) {
+		User user = userDao.findByEmail(signInCredentialsDto.getEmail());
 		
-		if (PasswordUtils.digestPassword())
+		if (user == null) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		
+		if (PasswordUtils.digestPassword(signInCredentialsDto.getPassword()) != user.getPassword()) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
 		
 		String token = generateJWTToken(signInCredentialsDto.getEmail());
 		return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();

@@ -17,11 +17,6 @@ import java.io.IOException;
 import java.security.Key;
 import java.util.logging.Logger;
 
-/**
- * @author Antonio Goncalves
- *         http://www.antoniogoncalves.org
- *         --
- */
 @Provider
 @JWTTokenNeeded
 @Priority(Priorities.AUTHENTICATION)
