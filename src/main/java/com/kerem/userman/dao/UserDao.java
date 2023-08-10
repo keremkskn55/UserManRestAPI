@@ -10,4 +10,5 @@ public interface UserDao{
 	public List<User> findAll();
 	public boolean update(User entity);
 	public boolean deleteById(int id);
+	public User findByEmail(String email);
 }

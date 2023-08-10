@@ -7,7 +7,7 @@
 
     <persistence-unit name="userManagement" transaction-type="RESOURCE_LOCAL">
         <jta-data-source>java:jboss/datasources/MysqlLocalDS</jta-data-source>
-        <class>com.kerem.model.User</class>
+        <class>com.kerem.userman.model.User</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update" />

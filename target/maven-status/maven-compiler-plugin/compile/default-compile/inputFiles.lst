@@ -2,5 +2,6 @@ C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\us
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\dao\impl\UserDaoImpl.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\business\UserBusiness.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\model\User.java
-C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\ws\UserWs.java
+C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\ws\UserEndpoint.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\dao\UserDao.java
+C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\ws\UserManagementWs.java

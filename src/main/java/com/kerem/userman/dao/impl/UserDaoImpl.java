@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import com.kerem.userman.dao.UserDao;
@@ -102,5 +103,12 @@ public class UserDaoImpl implements UserDao{
         }
         
         return isSuccesed;
+    }
+    
+    public User findByEmail(String email) {
+    	EntityManager em = entityManagerFactory.createEntityManager();
+    	TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u WHERE u.email = :email AND u.password = :password", User.class
+            );
     }
 }

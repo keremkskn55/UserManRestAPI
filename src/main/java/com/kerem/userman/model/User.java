@@ -10,32 +10,35 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String username;
+    private String email;
     private String name;
     private String surname;
     private int age;
+    private String password;
     
     public User () {}
     
     
 	
-	public User(String username, String name, String surname, int age) {
+	public User(String email, String name, String surname, int age, String password) {
 		super();
-		this.username = username;
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
+		this.password = password;
 	}
 	
 	
 
-	public User(int id, String username, String name, String surname, int age) {
+	public User(int id, String email, String name, String surname, int age, String password) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
+		this.password = password;
 	}
 
 
@@ -46,11 +49,11 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
@@ -88,6 +91,20 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 	
     
     
