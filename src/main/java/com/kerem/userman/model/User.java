@@ -19,23 +19,21 @@ public class User {
     private String surname;
     private int age;
     private String password;
+    private String salt;
     
     public User () {}
-    
-    
 	
-	public User(String email, String name, String surname, int age, String password) {
+	public User(String email, String name, String surname, int age, String password, String salt) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
 		this.password = password;
+		this.salt = salt;
 	}
-	
-	
 
-	public User(int id, String email, String name, String surname, int age, String password) {
+	public User(int id, String email, String name, String surname, int age, String password, String salt) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -43,6 +41,7 @@ public class User {
 		this.surname = surname;
 		this.age = age;
 		this.password = password;
+		this.salt = salt;
 	}
 
 
@@ -96,20 +95,21 @@ public class User {
 		this.age = age;
 	}
 
-
-
 	public String getPassword() {
 		return password;
 	}
 
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
     
-    
+	
 }

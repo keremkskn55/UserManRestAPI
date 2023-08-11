@@ -33,14 +33,13 @@ public class AuthBusinessImpl implements AuthBusiness{
 	
     @Inject
     private KeyGenerator keyGenerator;
-	
-    @Context
-    private UriInfo uriInfo;
-    
 
 	@Override
 	public Response register(User user) {
-		user.setPassword(PasswordUtils.digestPassword(user.getPassword()));
+		String salt = PasswordUtils.generateSalt();
+		String hashedPassword = PasswordUtils.hashPassword(user.getPassword(), salt);
+		user.setPassword(hashedPassword);
+		user.setSalt(salt);
 		boolean isAdded = userDao.add(user);
 		
 		if (!isAdded) {
@@ -59,22 +58,21 @@ public class AuthBusinessImpl implements AuthBusiness{
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		
-		if (PasswordUtils.digestPassword(signInCredentialsDto.getPassword()) != user.getPassword()) {
-			return Response.status(Response.Status.BAD_REQUEST).build();
+		if (PasswordUtils.verifyPassword(signInCredentialsDto.getPassword(), user.getPassword(), user.getSalt())) {
+			String token = generateJWTToken(signInCredentialsDto.getEmail());
+			return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
 		}
-		
-		String token = generateJWTToken(signInCredentialsDto.getEmail());
-		return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
+		return Response.status(Response.Status.BAD_REQUEST).build();
 	}
 	
 	private String generateJWTToken(String username) {
         Key key = keyGenerator.generateKey();
         return Jwts.builder()
                 .setSubject(username)
-                .setIssuer(uriInfo.getAbsolutePath().toString())
+                .setIssuer("UserManRest")
                 .setIssuedAt(new Date())
                 .setExpiration(toDate(LocalDateTime.now().plusMinutes(15L)))
-                .signWith(SignatureAlgorithm.HS512, key)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 	
