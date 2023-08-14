@@ -2,9 +2,9 @@ package com.kerem.userman.filter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import com.kerem.userman.util.KeyGenerator;
 
 import javax.annotation.Priority;
+import javax.crypto.SecretKey;
 import javax.ws.rs.Priorities;
 import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;
@@ -13,6 +13,9 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
+
+import com.kerem.userman.util.KeyGeneratorUtils;
+
 import java.io.IOException;
 import java.security.Key;
 
@@ -22,8 +25,6 @@ import java.security.Key;
 public class JWTTokenNeededFilter implements ContainerRequestFilter {
 
 
-	@Inject
-	private KeyGenerator keyGenerator;
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -42,12 +43,12 @@ public class JWTTokenNeededFilter implements ContainerRequestFilter {
 		try {
 
 			// Validate the token
-			Key key = keyGenerator.generateKey();
+			SecretKey key = KeyGeneratorUtils.generateKey();
 
 			Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
-
-
+			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
 		}
 	}

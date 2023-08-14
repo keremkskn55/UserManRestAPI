@@ -2,6 +2,7 @@ C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\us
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\business\AuthBusiness.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\filter\JWTTokenNeeded.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\filter\JWTTokenNeededFilter.java
+C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\util\SimpleKeyGeneratorImpl.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\util\PasswordUtils.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\util\SimpleKeyGenerator.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\dao\UserDao.java
@@ -11,6 +12,5 @@ C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\us
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\dao\impl\UserDaoImpl.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\business\UserBusiness.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\model\User.java
-C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\util\KeyGenerator.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\ws\UserEndpoint.java
 C:\Users\keremk\Eclipse 2022-06 workspace\UserManRest\src\main\java\com\kerem\userman\dto\SignInCredentailsDto.java

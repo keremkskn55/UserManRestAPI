@@ -1,9 +1,16 @@
 package com.kerem.userman.dto;
 
-public class SignInCredentailsDto {
+import java.io.Serializable;
+
+public class SignInCredentailsDto implements Serializable {
 	private String email;
 	private String password;
 	
+	
+	
+	public SignInCredentailsDto() {
+	}
+
 	public SignInCredentailsDto(String email, String password) {
 		super();
 		this.email = email;
