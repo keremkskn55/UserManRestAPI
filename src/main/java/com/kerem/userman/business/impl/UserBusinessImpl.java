@@ -8,7 +8,10 @@ import javax.ws.rs.core.Response;
 
 import com.kerem.userman.business.UserBusiness;
 import com.kerem.userman.dao.UserDao;
+import com.kerem.userman.dto.EmailPayload;
 import com.kerem.userman.model.User;
+import com.kerem.userman.util.PasswordUtils;
+import com.kerem.userman.util.SendingEmailUtils;
 
 
 
@@ -31,6 +34,24 @@ public class UserBusinessImpl implements UserBusiness {
 	}
 	
 	public Response createUser(User user) {
+		String staticPassword = "aA123456!";
+		
+		EmailPayload emailPayload = new EmailPayload();
+		emailPayload.setToEmail(user.getEmail());
+		emailPayload.setTitle("UserMan Password");
+		emailPayload.setContext("You're added to website. Your password: " + staticPassword);
+		
+		boolean isSentEmail = SendingEmailUtils.sendingEmail(emailPayload);
+		
+		if (!isSentEmail) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		
+		String salt = PasswordUtils.generateSalt();
+		String hashedPassword = PasswordUtils.hashPassword(staticPassword, salt);
+		user.setPassword(hashedPassword);
+		user.setSalt(salt);
+		
 		boolean isSuccesed = userDao.add(user);
 		if (isSuccesed) {
 			return Response.status(Response.Status.CREATED).build();

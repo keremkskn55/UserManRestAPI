@@ -11,7 +11,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtTokenUtils {
-	public static String generateJWTToken(String username, SecretKey key){
+	public static String generateJWTToken(String username){
+		SecretKey key = KeyGeneratorUtils.generateKey();
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuer("UserManRest")
