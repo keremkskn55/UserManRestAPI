@@ -6,6 +6,7 @@ import javax.crypto.SecretKey;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
@@ -47,10 +48,9 @@ public class AuthBusinessImpl implements AuthBusiness{
 		try {
 			String token = JwtTokenUtils.generateJWTToken(user.getEmail());
 			
-	        Cookie cookie = new Cookie("jwt_token", token);
-	        NewCookie newCookie = new NewCookie(cookie, "JWT Token", 3600, false);
-	        
-			return Response.ok("User registered successfully").cookie(newCookie).build();
+			return Response.ok("User registered successfully")
+		            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+		            .build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
@@ -68,10 +68,9 @@ public class AuthBusinessImpl implements AuthBusiness{
 			try {
 				String token = JwtTokenUtils.generateJWTToken(signInCredentialsDto.getEmail());
 				
-		        Cookie cookie = new Cookie("jwt_token", token);
-		        NewCookie newCookie = new NewCookie(cookie, "JWT Token", 3600, false);
-		        
-				return Response.ok("User signed in successfully").cookie(newCookie).build();
+				return Response.ok("User registered successfully")
+			            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+			            .build();
 			} catch (Exception e) {
 				return Response.status(Response.Status.BAD_REQUEST).build();
 			}
