@@ -16,6 +16,7 @@ import com.kerem.userman.filter.JWTTokenNeeded;
 import com.kerem.userman.model.User;
 
 @Path("/users")
+@JWTTokenNeeded
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserEndpoint {
@@ -25,7 +26,6 @@ public class UserEndpoint {
 	UserBusiness userBusinessUnit;
 	
 	@GET
-	@JWTTokenNeeded
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/test")
 	public String test() {
