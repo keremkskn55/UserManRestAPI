@@ -9,6 +9,8 @@ import javax.ws.rs.core.Response;
 import com.kerem.userman.business.UserBusiness;
 import com.kerem.userman.dao.UserDao;
 import com.kerem.userman.dto.EmailPayload;
+import com.kerem.userman.model.Role;
+import com.kerem.userman.model.Tenant;
 import com.kerem.userman.model.User;
 import com.kerem.userman.util.PasswordUtils;
 import com.kerem.userman.util.SendingEmailUtils;
@@ -51,6 +53,9 @@ public class UserBusinessImpl implements UserBusiness {
 		String hashedPassword = PasswordUtils.hashPassword(staticPassword, salt);
 		user.setPassword(hashedPassword);
 		user.setSalt(salt);
+		Tenant tenant = new Tenant("Kamu SM");
+		user.setTenant(tenant);
+		user.setRole(new Role("Admin", true, true, true, tenant));
 		
 		boolean isSuccesed = userDao.add(user);
 		if (isSuccesed) {
