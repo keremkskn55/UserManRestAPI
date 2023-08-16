@@ -21,6 +21,12 @@ public class User {
     private int age;
     private String password;
     private String salt;
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Role role;
     
     public User () {}
 	

@@ -6,9 +6,11 @@ C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kere
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\business\AuthBusiness.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\filter\JWTTokenNeeded.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\util\JwtTokenUtils.java
+C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\model\Role.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\model\User.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\util\SendingEmailUtils.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\filter\JWTTokenNeededFilter.java
+C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\model\Tenant.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\dao\impl\UserDaoImpl.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\dto\EmailPayload.java
 C:\Projects\JavaProjects\eclipse-workspace\UserManRestAPI\src\main\java\com\kerem\userman\business\impl\AuthBusinessImpl.java
