@@ -57,12 +57,7 @@ public class UserBusinessImpl implements UserBusiness {
 		String hashedPassword = PasswordUtils.hashPassword(staticPassword, salt);
 		user.setPassword(hashedPassword);
 		user.setSalt(salt);
-		
-		Role role = roleDao.findByName("Admin");
-		
-		// Role role = new Role("Admin", true, true, true);
-		role.addUser(user);
-		boolean isSuccesed = userDao.add(user);
+		d(user);
 		if (isSuccesed) {
 			return Response.status(Response.Status.CREATED).build();
 		}
