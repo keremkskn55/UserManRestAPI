@@ -1,5 +1,6 @@
 com\kerem\userman\util\SendingEmailUtils$1.class
 com\kerem\userman\business\AuthBusiness.class
+com\kerem\userman\dao\TenantDao.class
 com\kerem\userman\dao\UserDao.class
 com\kerem\userman\util\SendingEmailUtils.class
 com\kerem\userman\model\Role.class
@@ -16,6 +17,7 @@ com\kerem\userman\dto\EmailPayload.class
 com\kerem\userman\util\KeyGeneratorUtils.class
 com\kerem\userman\filter\JWTTokenNeeded.class
 com\kerem\userman\filter\JWTTokenNeededFilter.class
+com\kerem\userman\dao\impl\TenantDaoImpl.class
 com\kerem\userman\dto\SignInCredentailsDto.class
 com\kerem\userman\business\impl\UserBusinessImpl.class
 com\kerem\userman\model\User.class

@@ -7,10 +7,10 @@ import javax.inject.Named;
 import javax.ws.rs.core.Response;
 
 import com.kerem.userman.business.UserBusiness;
+import com.kerem.userman.dao.RoleDao;
 import com.kerem.userman.dao.UserDao;
 import com.kerem.userman.dto.EmailPayload;
 import com.kerem.userman.model.Role;
-import com.kerem.userman.model.Tenant;
 import com.kerem.userman.model.User;
 import com.kerem.userman.util.PasswordUtils;
 import com.kerem.userman.util.SendingEmailUtils;
@@ -23,6 +23,10 @@ public class UserBusinessImpl implements UserBusiness {
 	@Inject
 	@Named("userDaoImpl")
     private UserDao userDao;
+	
+	@Inject
+	@Named("roleDaoImpl")
+    private RoleDao roleDao;
     
 	
 	public Response findUserById(int id) {
@@ -53,10 +57,11 @@ public class UserBusinessImpl implements UserBusiness {
 		String hashedPassword = PasswordUtils.hashPassword(staticPassword, salt);
 		user.setPassword(hashedPassword);
 		user.setSalt(salt);
-		Tenant tenant = new Tenant("Kamu SM");
-		user.setTenant(tenant);
-		user.setRole(new Role("Admin", true, true, true, tenant));
 		
+		Role role = roleDao.findByName("Admin");
+		
+		// Role role = new Role("Admin", true, true, true);
+		role.addUser(user);
 		boolean isSuccesed = userDao.add(user);
 		if (isSuccesed) {
 			return Response.status(Response.Status.CREATED).build();
@@ -75,6 +80,10 @@ public class UserBusinessImpl implements UserBusiness {
     }
 	
 	public Response updateUser (User user) {
+		User selectedUser = userDao.findById(user.getId());
+		user.setPassword(selectedUser.getPassword());
+		user.setSalt(selectedUser.getSalt());
+		
     	boolean isSuccesed = userDao.update(user);
     	if (isSuccesed) {
     		return Response.ok().build();

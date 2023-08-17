@@ -11,10 +11,10 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import com.kerem.userman.business.AuthBusiness;
+import com.kerem.userman.dao.RoleDao;
 import com.kerem.userman.dao.UserDao;
 import com.kerem.userman.dto.SignInCredentailsDto;
 import com.kerem.userman.model.Role;
-import com.kerem.userman.model.Tenant;
 import com.kerem.userman.model.User;
 import com.kerem.userman.util.JwtTokenUtils;
 import com.kerem.userman.util.KeyGeneratorUtils;
@@ -34,21 +34,42 @@ public class AuthBusinessImpl implements AuthBusiness{
 	@Inject
 	@Named("userDaoImpl")
     private UserDao userDao;
+	
+	@Inject
+	@Named("roleDaoImpl")
+    private RoleDao roleDao;
 
 	@Override
 	public Response register(User user) {
+		
 		String salt = PasswordUtils.generateSalt();
 		String hashedPassword = PasswordUtils.hashPassword(user.getPassword(), salt);
 		user.setPassword(hashedPassword);
 		user.setSalt(salt);
-		Tenant tenant = new Tenant("Kamu SM");
-		user.setTenant(tenant);
-		user.setRole(new Role("Admin", true, true, true, tenant));
-		boolean isAdded = userDao.add(user);
 		
-		if (!isAdded) {
-			return Response.status(Response.Status.BAD_REQUEST).build();
+		Role selectedRole = roleDao.findByName("Admin");
+		
+		if (selectedRole == null) {
+			Role role = new Role("Admin", true, true, true);
+			role.addUser(user);
+			
+			boolean isAdded = roleDao.add(role);
+			
+			if (!isAdded) {
+				return Response.status(Response.Status.BAD_REQUEST).build();
+			}
 		}
+		else {
+			user.setRole(selectedRole);
+			
+			boolean isAdded = userDao.add(user);
+			
+			if (!isAdded) {
+				return Response.status(Response.Status.BAD_REQUEST).build();
+			} 
+		}
+		
+		
 		
 		try {
 			String token = JwtTokenUtils.generateJWTToken(user.getEmail());

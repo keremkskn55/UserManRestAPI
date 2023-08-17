@@ -1,5 +1,6 @@
 package com.kerem.userman.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,12 +11,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "roles")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "users"})
+@NamedQueries({
+    @NamedQuery(name = Role.FIND_BY_NAME, query = "SELECT u FROM Role u WHERE u.name = :name"),
+})
 public class Role {
+	
+	public static final String FIND_BY_NAME = "Role.findByName";
+
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,31 +36,31 @@ public class Role {
 	private boolean canUserAdd;
 	private boolean canUserEdit;
 	private boolean canUserDelete;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant;
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<User> users;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "role", cascade = CascadeType.PERSIST)
+    private List<User> users = new ArrayList<>();
 	
 	public Role() {}
 
-	public Role(String name, boolean canUserAdd, boolean canUserEdit, boolean canUserDelete, Tenant tenant) {
+	public Role(String name, boolean canUserAdd, boolean canUserEdit, boolean canUserDelete) {
 		super();
 		this.name = name;
 		this.canUserAdd = canUserAdd;
 		this.canUserEdit = canUserEdit;
 		this.canUserDelete = canUserDelete;
-		this.tenant = tenant;
 	}
 
-	public Role(int id, String name, boolean canUserAdd, boolean canUserEdit, boolean canUserDelete, Tenant tenant) {
+	public Role(int id, String name, boolean canUserAdd, boolean canUserEdit, boolean canUserDelete) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.canUserAdd = canUserAdd;
 		this.canUserEdit = canUserEdit;
 		this.canUserDelete = canUserDelete;
-		this.tenant = tenant;
+	}
+	
+	public void addUser(User user) {
+		users.add(user);
+		user.setRole(this);
 	}
 
 	public int getId() {
@@ -89,15 +102,4 @@ public class Role {
 	public void setCanUserDelete(boolean canUserDelete) {
 		this.canUserDelete = canUserDelete;
 	}
-
-	public Tenant getTenant() {
-		return tenant;
-	}
-
-	public void setTenant(Tenant tenant) {
-		this.tenant = tenant;
-	}
-	
-	
-	
 }

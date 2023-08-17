@@ -2,8 +2,6 @@ package com.kerem.userman.model;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity
 @Table(name = "users")
 @NamedQueries({
@@ -23,16 +21,26 @@ public class User {
     private int age;
     private String password;
     private String salt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
     
     public User () {}
+    
+    
 	
-	public User(String email, String name, String surname, int age, String password, String salt, Tenant tenant, Role role) {
+	public User(String email, String name, String surname, int age, String password) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.age = age;
+		this.password = password;
+	}
+
+
+
+	public User(String email, String name, String surname, int age, String password, String salt) {
 		super();
 		this.email = email;
 		this.name = name;
@@ -40,11 +48,9 @@ public class User {
 		this.age = age;
 		this.password = password;
 		this.salt = salt;
-		this.tenant = tenant;
-		this.role = role;
 	}
 
-	public User(int id, String email, String name, String surname, int age, String password, String salt, Tenant tenant, Role role) {
+	public User(int id, String email, String name, String surname, int age, String password, String salt) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -53,8 +59,6 @@ public class User {
 		this.age = age;
 		this.password = password;
 		this.salt = salt;
-		this.tenant = tenant;
-		this.role = role;
 	}
 
 
@@ -122,14 +126,6 @@ public class User {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
-	}
-
-	public Tenant getTenant() {
-		return tenant;
-	}
-
-	public void setTenant(Tenant tenant) {
-		this.tenant = tenant;
 	}
 
 	public Role getRole() {
