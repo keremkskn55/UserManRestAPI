@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.kerem.userman.business.UserBusiness;
+import com.kerem.userman.filter.AuthorizationNeeded;
 import com.kerem.userman.filter.JWTTokenNeeded;
 import com.kerem.userman.model.User;
 
@@ -28,6 +29,7 @@ public class UserEndpoint {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/test")
+	@AuthorizationNeeded({"AddUser"})
 	public String test() {
 		return "Test-userEndpoint";
 	}

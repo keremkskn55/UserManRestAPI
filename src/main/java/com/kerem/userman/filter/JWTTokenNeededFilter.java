@@ -21,7 +21,7 @@ import java.security.Key;
 
 @JWTTokenNeeded
 @Provider
-@Priority(Priorities.AUTHORIZATION)
+@Priority(Priorities.AUTHENTICATION)
 public class JWTTokenNeededFilter implements ContainerRequestFilter {
 
 
@@ -46,7 +46,7 @@ public class JWTTokenNeededFilter implements ContainerRequestFilter {
 			SecretKey key = KeyGeneratorUtils.generateKey();
 
 			Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
-			
+			System.out.println(claims.getSubject());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());

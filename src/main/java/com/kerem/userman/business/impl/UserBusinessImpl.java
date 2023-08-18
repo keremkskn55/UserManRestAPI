@@ -57,7 +57,7 @@ public class UserBusinessImpl implements UserBusiness {
 		String hashedPassword = PasswordUtils.hashPassword(staticPassword, salt);
 		user.setPassword(hashedPassword);
 		user.setSalt(salt);
-		d(user);
+		boolean isSuccesed = userDao.add(user);
 		if (isSuccesed) {
 			return Response.status(Response.Status.CREATED).build();
 		}
